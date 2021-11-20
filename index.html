@@ -10,31 +10,35 @@
 </head>
 <body>
   <main class="main">
-    <div class="container">
-      <form class="form">
-        <h2 class="form-heading">Create building</h2>
-        <div class="form-group">
-          <label class="form-group__label" for="floors">Floors</label>
-          <select class="form-group__select" name="floors" id="floors">
-            <option value="">Choose floors count</option>
-          </select>
+    <form class="form">
+      <div class="container">
+        <div class="form-content">
+          <h2 class="form-heading">Create building</h2>
+          <div class="form-group">
+            <label class="form-group__label" for="floors">Floors</label>
+            <input type="number" class="form-group__input" name="floors" id="floors">
+            <span class="form-group__warning"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-group__label" for="elevators">Elevators</label>
+            <input type="number" class="form-group__input" name="elevators" id="elevators">
+            <span class="form-group__warning"></span>
+          </div>
+          <button class="form-submit">Create</button>
         </div>
-        <div class="form-group">
-          <label class="form-group__label" for="elevators">Elevators</label>
-          <select class="form-group__select" name="elevators" id="elevators">
-            <option value="">Choose elevators count</option>
-          </select>
-        </div>
-        <button class="form-submit">Create</button>
-      </form>
+      </div>
+    </form>
 
-      <div class="game hide">
-        <div class="game-actions">
-          <button class="game-action add-floor">Add Floor</button>
-          <button class="game-action add-elevator">Add Elevator</button>
-        </div>
-        <div class="floors">
-          <div class="elevators"></div>
+    <div class="game">
+      <div class="container">
+        <div class="game-content">
+          <div class="game-actions">
+            <button class="game-action add-floor">Add Floor</button>
+            <button class="game-action add-elevator">Add Elevator</button>
+          </div>
+          <div class="floors">
+            <div class="elevators"></div>
+          </div>
         </div>
       </div>
     </div>

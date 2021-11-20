@@ -4,7 +4,7 @@ const renderElevators = (elevators, floors) => {
   const $elevators = document.querySelector('.elevators');
   const $addElevator = document.querySelector('.add-elevator');
   
-  if(elevators.length >= 6) {
+  if(elevators.length >= 10) {
     $addElevator.disabled = true;
   } else {
     $addElevator.disabled = false;

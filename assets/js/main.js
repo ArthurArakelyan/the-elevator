@@ -70,14 +70,14 @@ function checkElevatorsMoving(warning) {
 }
 
 function addFloor() {
-  if(floors.length < 20 && checkElevatorsMoving('floor')) {
+  if(floors.length < 100 && checkElevatorsMoving('floor')) {
     floors.push(floors.length);
     render();
   }
 }
 
 function addElevator() {
-  if(elevators.length < 6 && checkElevatorsMoving('elevator')) {
+  if(elevators.length < 10 && checkElevatorsMoving('elevator')) {
     elevators.push({id: randomId(), moving: false, floor: 0});
     renderElevators(elevators, floors);
   }

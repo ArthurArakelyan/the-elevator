@@ -1,28 +1,31 @@
-.main {
-  margin: 80px 0;
-}
 
 .form {
   position: absolute;
   left: 0;
+  top: 0;
+  width: 100%;
+  margin: 50px 0;
+  transform: translateX(0%);
+  opacity: 1;
+  transition: transform .3s ease-in-out, opacity .3s ease-in-out;
+}
+.form.hide {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.form-content {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  transform: translateX(0);
-  opacity: 1;
-  transition: transform .3s ease-in-out, opacity .3s ease-in-out;
-}
-.form.hide {
-  transform: translateX(-122%);
-  opacity: 0;
 }
 .form-heading {
   font-size: 22px;
 }
 .form-group {
-  margin-top: 15px;
+  position: relative;
+  margin-top: 20px;
   width: 50%;
   display: flex;
   align-items: flex-start;
@@ -33,23 +36,37 @@
   font-size: 16px;
   margin-bottom: 10px;
 }
-.form-group__select {
+.form-group__input {
   outline: none;
   font-size: 14px;
   width: 100%;
-  cursor: pointer;
   border: 1px solid #5b5b5b;
   border-radius: 3px;
   padding: 2px 5px;
   background-color: transparent;
   transition: box-shadow .2s ease-in-out, border-color .2s ease-in-out;
 }
-.form-group__select.invalid {
+.form-group__input:focus {
+  box-shadow: 0 0 5px #5b5b5b;
+}
+.form-group__input.invalid {
   border-color: red !important;
+}
+.form-group__input.invalid:focus {
+  box-shadow: 0 0 5px red !important;
+}
+.form-group__warning {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 12px;
+  color: red;
 }
 .form-submit {
   font-size: 16px;
-  margin-top: 15px;
+  margin-top: 20px;
   padding: 5px 10px;
   border-radius: 6px;
   border: 1px solid #5b5b5b;
@@ -66,23 +83,23 @@
 }
 
 .game {
+  margin: 50px 0;
+  width: 100%;
+  transform: translateX(100%);
+  opacity: 0;
+}
+.game.open {
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform .3s ease-in-out, opacity .3s ease-in-out;
+  transition-delay: .3s;
+}
+.game-content {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
-.game.open {
-  transition: transform .3s ease-in-out, opacity .3s ease-in-out;
-  transition-delay: .3s;
-
-  transform: translateX(0);
-  opacity: 1;
-}
-.game.hide {
-  position: absolute;
-  transform: translateX(122%);
-  opacity: 0;
 }
 .floors {
   position: relative;

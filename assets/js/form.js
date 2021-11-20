@@ -6,59 +6,76 @@ import randomId from "./util/randomId.js";
 // elements
 const $form = document.querySelector('.form');
 const $game = document.querySelector('.game');
-const $floorsSelect = $form.querySelector('#floors');
-const $elevatorsSelect = $form.querySelector('#elevators');
-
-// form selects render
-for(let i = 1; i <= 20; i++) {
-  $floorsSelect.innerHTML += `<option value="${i}">${i}</option>`;
-}
-
-for(let i = 1; i <= 6; i++) {
-  $elevatorsSelect.innerHTML += `<option value="${i}">${i}</option>`;
-}
+const $floorsInput = $form.querySelector('#floors');
+const $elevatorsInput = $form.querySelector('#elevators');
 
 // validation
 let submitted = false;
+
+const validateFloors = (value = +$floorsInput.value) => value > 0 && value <= 100;
+const validateElevators = (value = +$elevatorsInput.value) => value > 0 && value <= 10;
 
 // listeners
 $form.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  if(!$floorsSelect.value || !$elevatorsSelect.value) {
-    submitted = true;
-    if(!$floorsSelect.value) {
-      $floorsSelect.classList.add('invalid');
-    } else if(!$elevatorsSelect.value) {
-      $elevatorsSelect.classList.add('invalid');
+  const floorsCount = +$floorsInput.value;
+  const elevatorsCount = +$elevatorsInput.value;
+
+  const floorsIsValid = validateFloors();
+  const elevatorsIsValid = validateElevators();
+
+  submitted = true;
+
+  if(!floorsIsValid || !elevatorsIsValid) {
+    if(!floorsIsValid) {
+      $floorsInput.classList.add('invalid');
+      $floorsInput.nextElementSibling.innerHTML = 'No more 100';
+    }
+    
+    if(!elevatorsIsValid) {
+      $elevatorsInput.classList.add('invalid');
+      $elevatorsInput.nextElementSibling.innerHTML = 'No more 10';
     }
 
     return false;
   }
 
-  for(let i = 0; i < +$floorsSelect.value; i++) {
-    floors.push(i);
-  }
-
-  for(let i = 0; i < +$elevatorsSelect.value; i++) {
-    elevators.push({id: randomId(), moving: false, floor: 0});
-  }
-
-  $form.classList.add('hide');
-  $game.classList.remove('hide');
-  $game.classList.add('open');
+  if(floorsIsValid && elevatorsIsValid) {
+    console.log('a');
+    for(let i = 0; i < floorsCount; i++) {
+      floors.push(i);
+    }
   
-  render();
+    for(let i = 0; i < elevatorsCount; i++) {
+      elevators.push({id: randomId(), moving: false, floor: 0});
+    }
+  
+    $form.classList.add('hide');
+    $game.classList.add('open');
+    
+    render();
+  }
 });
 
-[$floorsSelect, $elevatorsSelect].forEach((select) => {
-  select.addEventListener('change', ({target: {value}}) => {
-    if(submitted) {
-      if(value) {
-        select.classList.remove('invalid');
-      } else {
-        select.classList.add('invalid');
-      }
-    }
+[
+  {input: $floorsInput, validator: validateFloors, max: 100},
+  {input: $elevatorsInput, validator: validateElevators, max: 10}
+].forEach(({input, validator, max}) => {
+  input.addEventListener('input', ({target: {value}}) => {
+    validateInputsAfterSubmit(input, () => validator(+value), max);
   });
 });
+
+// functions
+function validateInputsAfterSubmit(input, validator, max) {
+  if(submitted) {
+    if(validator()) {
+      input.classList.remove('invalid');
+      input.nextElementSibling.innerHTML = '';
+    } else {
+      input.classList.add('invalid');
+      input.nextElementSibling.innerHTML = `No more ${max}`;
+    }
+  }
+}

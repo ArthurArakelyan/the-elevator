@@ -4,7 +4,7 @@ const renderFloors = (floors, handleClick) => {
   const $floors = document.querySelector('.floors');
   const $addFloor = document.querySelector('.add-floor');
   
-  if(floors.length >= 20) {
+  if(floors.length >= 100) {
     $addFloor.disabled = true;
   } else {
     $addFloor.disabled = false;
